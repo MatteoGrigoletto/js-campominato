@@ -1,5 +1,6 @@
 `use strict`;
 let bombe =[];
+let points = 0;
 function generator(location,number,divSize){
 
     for(i = 1; i <= number; i++){          
@@ -9,13 +10,17 @@ function generator(location,number,divSize){
         location.append(cellBlock);
 
         cellBlock.addEventListener(`click`, function(){
-            
+
         let check = parseInt(this.innerHTML);
         if(bombe.includes(check)){
             this.classList.toggle(`bg-red`);
+
             
         }else{
             this.classList.toggle(`bg-blue`);  
+            points += 1;
+            document.getElementById(`score`).innerHTML=`Il tuo punteggio e': ${points}`;
+
         }
        console.log(`hai cliccato la casella `, this.innerHTML); 
        })
