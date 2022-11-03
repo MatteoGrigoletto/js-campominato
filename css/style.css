@@ -62,3 +62,6 @@ header small{
 .bg-blue{
     background-color: blue;
 }
+.bg-red{
+    background-color: rgb(200, 41, 54);
+}
