@@ -1,6 +1,5 @@
 `use strict`;
 let bombe =[];
-
 function generator(location,number,divSize){
 
     for(i = 1; i <= number; i++){          
@@ -8,11 +7,19 @@ function generator(location,number,divSize){
         cellBlock.classList.add(divSize);
         cellBlock.innerHTML = i;
         location.append(cellBlock);
+
         cellBlock.addEventListener(`click`, function(){
-            this.classList.toggle(`bg-blue`);
-            console.log(`hai cliccato la casella `, this.innerHTML);
             
-        })
+        let check = parseInt(this.innerHTML);
+        if(bombe.includes(check)){
+            this.classList.toggle(`bg-red`);
+            
+        }else{
+            this.classList.toggle(`bg-blue`);  
+        }
+       console.log(`hai cliccato la casella `, this.innerHTML); 
+       })
+
     }
 }
 function getRandomInt(min, max) {
@@ -41,12 +48,16 @@ const Generator = btnGenerator.addEventListener(`click`, function(){
     const difficulty = document.getElementById(`difficulty`).value;
     container.innerHTML = ``;
         if(difficulty === `easy`){ 
-        generator(container, 100, `div-10`);     
+            bombs(bombe, 100);
+            generator(container, 100, `div-10`);     
 
-
-        }else if(difficulty === `normal`){
+        }
+        else if(difficulty === `normal`){
+            bombs(bombe, 81);
             generator(container,81, `div-9`);
-        }else{
+        }
+        else{
+            bombs(bombe, 49);
             generator(container,49,`div-7`);
         
         }
