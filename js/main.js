@@ -1,6 +1,8 @@
 `use strict`;
 let bombe =[];
 let points = 0;
+let difficulty = document.getElementById(`difficulty`).value;
+
 function generator(location,number,divSize){
 
     for(i = 1; i <= number; i++){          
@@ -13,14 +15,25 @@ function generator(location,number,divSize){
 
         let check = parseInt(this.innerHTML);
         if(bombe.includes(check)){
-            this.classList.toggle(`bg-red`);
 
+            this.classList.add(`bg-red`);
+            window.location.reload();
+            alert(`hai perso`)
             
         }else{
-            this.classList.toggle(`bg-blue`);  
+            this.classList.add(`bg-blue`);  
             points += 1;
             document.getElementById(`score`).innerHTML=`Il tuo punteggio e': ${points}`;
-
+            if(difficulty === `easy` && points === 85){
+                alert(`hai vinto con ${points} punti`);
+                window.location.reload();
+            }else if( difficulty === `normal` && points === 66){
+                alert(`hai vinto con ${points} punti`);
+                window.location.reload();
+            }else if(difficulty === `hard` && points === 33){
+                alert(`hai vinto con ${points} punti `);
+                window.location.reload();
+            }
         }
        console.log(`hai cliccato la casella `, this.innerHTML); 
        })
@@ -46,16 +59,18 @@ function bombs(array ,  maxNumber){
 
 
 
+
 const container = document.querySelector(`.container`);
 const btnGenerator = document.getElementById(`my-btn`);
 const Generator = btnGenerator.addEventListener(`click`, function(){
 
-    const difficulty = document.getElementById(`difficulty`).value;
+    difficulty = document.getElementById(`difficulty`).value;
     container.innerHTML = ``;
         if(difficulty === `easy`){ 
             bombs(bombe, 100);
+            console.log(bombe)
             generator(container, 100, `div-10`);     
-
+            
         }
         else if(difficulty === `normal`){
             bombs(bombe, 81);
