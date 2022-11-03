@@ -21,9 +21,12 @@ main{
     align-items: center;
 }
 /* header */
-header div{
-    text-align: center;
-    line-height: 100px;
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 10px;
+
 }
 header small{
     font-weight: bold;
@@ -37,6 +40,11 @@ header small{
     display: flex;
     flex-wrap: wrap;
 
+}
+.logo{
+    display: flex;
+    align-items: center;
+    padding: 0px 10px;
 }
 /* main */
 .container div{
@@ -69,4 +77,8 @@ header small{
     text-align: center;
     font-size: 30px;
     font-weight: bold;
+}
+img{
+    display: block;
+    width: 80px;
 }
