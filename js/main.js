@@ -1,4 +1,5 @@
 `use strict`;
+let clickNumb = [];
 let bombe =[];
 let points = 0;
 let difficulty = document.getElementById(`difficulty`).value;
@@ -11,34 +12,30 @@ function generator(location,number,divSize){
         cellBlock.innerHTML = i;
         location.append(cellBlock);
 
-        cellBlock.addEventListener(`click`, function(){
+        cellBlock.addEventListener(`click`, function myFunction() {
 
-        let check = parseInt(this.innerHTML);
-        if(bombe.includes(check)){
-           
-            this.classList.add(`bg-red`);
-            alert(`hai perso ottenendo ${points} punti`)
-           window.location.reload();
-            
-        }else{
-            this.classList.add(`bg-blue`);  
-            points += 1;
-            document.getElementById(`score`).innerHTML=`Il tuo punteggio e': ${points}`;
-            if(difficulty === `easy` && points === 85){
-                alert(`hai vinto con ${points} punti`);
-                window.location.reload();
-            }else if( difficulty === `normal` && points === 66){
-                alert(`hai vinto con ${points} punti`);
-                window.location.reload();
-            }else if(difficulty === `hard` && points === 33){
-                alert(`hai vinto con ${points} punti `);
-                window.location.reload();
-            }
-        }
-       console.log(`hai cliccato la casella `, this.innerHTML);      
-       })    
+            if(clickNumb.includes(cellBlock.innerHTML) === false){
+                clickNumb.push(cellBlock.innerHTML);
+                if(bombe.includes(Number(cellBlock.innerHTML))){
+                    this.classList.add("bg-red");      
+                    alert(`hai perso la partita`);
+                    window.location.reload();
+                }else{
+                    this.classList.add("bg-blue");
+                    points+=1
+                    document.getElementById(`score`).innerHTML = `il tuo punteggio : ${points}`
+                } 
+                console.log(points )
+                if(points === number - 16){
+                    alert(`hai vinto il game`);
+                    window.location.reload();
+                }
+            } 
+        })       
     }
 }
+
+
 function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
@@ -46,13 +43,12 @@ function getRandomInt(min, max) {
 }
 
 function bombs(array ,  maxNumber){
-    i=0;
     while(bombe.length < 16){
         let number =  getRandomInt(1,maxNumber);
-         if(number != array[i]) {
+         if(bombe.includes(number) === false) {
              array.push(number);
+             console.log(array)
          }
-         i++;
     }
 }
 
